@@ -6,7 +6,7 @@ executor:
   config:
     harness: openai-agents
     use_responses: false
-  model: gemini/gemini-3.8-flash
+  model: openai/gpt-4.1-mini
 prompt: |
   You are the RUNNER. Execute exactly the experiment you are given with
   run_experiment(stack, attack, n, reason) - do not change it. If the tool

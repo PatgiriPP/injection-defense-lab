@@ -10,7 +10,7 @@ case "${LAB_PROVIDER:-gemini}" in
   openrouter) export OPENAI_BASE_URL=https://openrouter.ai/api/v1 OPENAI_API_KEY="$OPENROUTER_API_KEY" ;;
   groq)       export OPENAI_BASE_URL=https://api.groq.com/openai/v1 OPENAI_API_KEY="$GROQ_API_KEY" ;;
   openai)     unset OPENAI_BASE_URL ;;
-  litellm)    export OPENAI_BASE_URL=http://127.0.0.1:4000 OPENAI_API_KEY=local ;;
+  litellm)    export OPENAI_BASE_URL=http://127.0.0.1:4000 OPENAI_API_KEY="$LITELLM_MASTER_KEY" ;;
   *) echo "Unknown LAB_PROVIDER=$LAB_PROVIDER"; exit 1 ;;
 esac
 python scripts/set_model.py "${LAB_MODEL:?set LAB_MODEL in .env}" >/dev/null

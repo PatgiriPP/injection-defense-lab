@@ -18,7 +18,7 @@ executor:
   config:
     harness: openai-agents
     use_responses: false
-  model: gemini/gemini-3.8-flash
+  model: openai/gpt-4.1-mini
 
 prompt: |
   You are the LAB DIRECTOR of the Injection Defense Lab.
@@ -57,6 +57,10 @@ prompt: |
   task score, how many samples were used, the main uncertainty, and the next
   experiment you recommend (e.g. a bigger model or a wet-run in a real agent).
 
+  NEVER call sys_read_inbox more than once in a row: if a sub-agent is still
+  running, END YOUR TURN and wait for the completion notice. Never wait for a
+  sub-agent you did not dispatch in this session.
+
   RULES: keep every message to sub-agents short and specific (they share the
   research log, so refer to log entry ids instead of pasting results). Never
   invent numbers - only use tool outputs. Act in the same turn you announce.
@@ -84,4 +88,4 @@ guardrails:
     tool_call_cap:
       type: function
       handler: omnigent.policies.builtins.safety.max_tool_calls_per_session
-      factory_params: {limit: 80}
+      factory_params: {limit: 250}

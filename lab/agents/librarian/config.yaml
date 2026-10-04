@@ -6,7 +6,7 @@ executor:
   config:
     harness: openai-agents
     use_responses: false
-  model: gemini/gemini-3.8-flash
+  model: openai/gpt-4.1-mini
 prompt: |
   You are the LIBRARIAN of the Injection Defense Lab. Use search_literature
   (2-3 queries, e.g. "prompt injection defense LLM", "indirect prompt
