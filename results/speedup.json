@@ -15,10 +15,10 @@
     "replays": 300
   },
   "agent_lab": {
-    "answer": "D4 x A4_german",
-    "samples_used": 80,
-    "found_top_gap": false,
-    "true_asr_of_answer": null,
-    "speedup_vs_grid": "n/a - answer was not the top gap"
+    "answer": "D1+D2+D4 x A1_plain",
+    "samples_used": 96,
+    "found_top_gap": true,
+    "true_asr_of_answer": 0.75,
+    "speedup_vs_grid": 2.29
   }
 }
