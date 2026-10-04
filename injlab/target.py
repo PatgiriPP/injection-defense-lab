@@ -8,6 +8,7 @@ never be reported as findings (every result row records the provider).
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 import random
 import threading
@@ -39,6 +40,7 @@ def complete(messages: list[dict]) -> str:
         raise TargetError(f"Set {settings.PROVIDER_KEYS[settings.TARGET_PROVIDER]} first.")
     payload = {"model": settings.TARGET_MODEL, "messages": messages,
                "temperature": 0, "max_tokens": settings.TARGET_MAX_TOKENS}
+    payload.update(json.loads(os.environ.get("TARGET_EXTRA", "{}") or "{}"))
     for attempt in range(8):
         with _lock:  # simple rate limiter shared by all threads
             wait = settings.TARGET_MIN_INTERVAL - (time.time() - _last_call[0])
