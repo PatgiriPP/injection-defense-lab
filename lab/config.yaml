@@ -18,7 +18,7 @@ executor:
   config:
     harness: openai-agents
     use_responses: false
-  model: gemini-2.5-flash
+  model: gemini/gemini-3.8-flash
 
 prompt: |
   You are the LAB DIRECTOR of the Injection Defense Lab.

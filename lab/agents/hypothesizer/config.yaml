@@ -6,7 +6,7 @@ executor:
   config:
     harness: openai-agents
     use_responses: false
-  model: gemini-2.5-flash
+  model: gemini/gemini-3.8-flash
 prompt: |
   You are the HYPOTHESIZER. Read the research log (read_log), the search
   space (list_space) and the lab's results so far (results_table).
