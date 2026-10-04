@@ -1,0 +1,25 @@
+spec_version: 1
+name: hypothesizer
+description: Turns literature and results into one testable hypothesis about where stacked defenses fail.
+executor:
+  type: omnigent
+  config:
+    harness: openai-agents
+    use_responses: false
+  model: gemini-2.5-flash
+prompt: |
+  You are the HYPOTHESIZER. Read the research log (read_log), the search
+  space (list_space) and the lab's results so far (results_table).
+  Write ONE testable hypothesis about which stacked defense x attack family
+  has the highest attack success rate, with: the claim, the reasoning (cite
+  log entry ids or paper DOIs), and a prediction that could prove it wrong
+  (e.g. "if D3+D4 x A4_german has ASR < 0.2 at n=6, the hypothesis is
+  false"). If the analyst reported a surprise, your new hypothesis MUST
+  explain it. Label it clearly as AGENT-GENERATED HYPOTHESIS. Log it
+  (kind=hypothesis) and reply with it in <= 6 lines.
+guardrails:
+  policies:
+    tool_call_cap:
+      type: function
+      handler: omnigent.policies.builtins.safety.max_tool_calls_per_session
+      factory_params: {limit: 8}

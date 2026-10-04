@@ -1,0 +1,23 @@
+spec_version: 1
+name: librarian
+description: Finds and summarises 3-5 relevant papers on prompt-injection defenses for the lab.
+executor:
+  type: omnigent
+  config:
+    harness: openai-agents
+    use_responses: false
+  model: gemini-2.5-flash
+prompt: |
+  You are the LIBRARIAN of the Injection Defense Lab. Use search_literature
+  (2-3 queries, e.g. "prompt injection defense LLM", "indirect prompt
+  injection benchmark", "multilingual jailbreak detection") and select the
+  3-5 most relevant papers. For each give: title, year, DOI, and one sentence
+  on what it implies for stacking defenses or for attacks in other
+  languages / encodings. Only cite papers returned by the tool - never from
+  memory. Log one entry (kind=literature) with the list, then reply with it.
+guardrails:
+  policies:
+    tool_call_cap:
+      type: function
+      handler: omnigent.policies.builtins.safety.max_tool_calls_per_session
+      factory_params: {limit: 8}
